@@ -5,11 +5,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![CI](https://github.com/Xiao0o0o/input-ambiguity-detection/actions/workflows/ci.yml/badge.svg)](https://github.com/Xiao0o0o/input-ambiguity-detection/actions/workflows/ci.yml)
 
-Code and data for the AACL 2026 paper **"Detect Before You Disambiguate: Perturbation-Based Input Ambiguity Detection in LLMs"** by Tiejin Chen\*, Xiaoou Liu\*, Michael Clifford, Ahmadreza Moradipari, Yitao Chen, Kyungtae Han, Nejib Ammar and Hua Wei (\*equal contribution).
+Code and data for the AACL 2026 paper **"Detect Before You Disambiguate: Perturbation-Based Input Ambiguity Detection in LLMs"** by Tiejin Chen\*, Xiaoou Liu\*, Michael Clifford, Ahmadreza Moradipari, Yitao Chen, Kyungtae Han, Nejib Ammar, and Hua Wei (\*equal contribution).
 
 ## Overview
 
-LLMs often answer an ambiguous question as if it had a single meaning. A common way to detect ambiguity is to have an LLM paraphrase or clarify the question and measure how much the answers disagree. But to rephrase a question the model must first understand it, and understanding an ambiguous question means picking one reading. The rewrite can remove the very ambiguity it is meant to measure.
+LLMs often answer an ambiguous question as if it had a single meaning. A common way to detect ambiguity is to have an LLM paraphrase or clarify the question and measure how much the answers disagree. But to rephrase a question, the model must first understand it, and understanding an ambiguous question means picking one reading. The rewrite can remove the very ambiguity it is meant to measure.
 
 We instead perturb the input with **low-capacity, label-preserving, semantics-blind** edits. These are small surface changes that never choose an interpretation. We then measure how much the model's answers spread across the original and perturbed questions. Two detectors implement this:
 
@@ -59,7 +59,7 @@ pip install "input-ambiguity-detection[blackbox]"   # + black-box detector (vLLM
 pip install "input-ambiguity-detection[all]"        # + INT8 DiffMask (bitsandbytes) and data/build/* deps
 ```
 
-From source, with the data, quick start and shell scripts (recommended to reproduce the paper):
+From the source, with the data, quick start, and shell scripts (recommended to reproduce the paper):
 
 ```bash
 git clone https://github.com/Xiao0o0o/input-ambiguity-detection.git
@@ -120,7 +120,7 @@ bash quickstart/run_quickstart.sh          # or: make quick-eval
 | EigV(Agree) baseline (K=10 samples, no perturbation) | 0.6435 | 0.644 |
 | **Ours (White-Box, Logit Lens)** | **0.7083** | **0.708** |
 
-Both options give the numbers above, which match the paper. Option B also stores every intermediate file of the run (attribution, perturbations, answers), and the same script resumes from any earlier stage: `uq` (recompute NLI from the stored answers), `generate`, `perturb` or `attribution` (from scratch), e.g. `bash quickstart/run_quickstart.sh uq`. Expected deviations when re-running those stages are listed in [`quickstart/README.md`](quickstart/README.md).
+Both options give the numbers above, which match the paper. Option B also stores every intermediate file of the run (attribution, perturbations, answers), and the same script resumes from any earlier stage: `uq` (recompute NLI from the stored answers), `generate`, `perturb` or `attribution` (from scratch), e.g., `bash quickstart/run_quickstart.sh uq`. Expected deviations when re-running those stages are listed in [`quickstart/README.md`](quickstart/README.md).
 
 To see what the black-box rules do to a question, without a model:
 
@@ -140,7 +140,7 @@ bash scripts/run_whitebox_vision.sh Qwen/Qwen2.5-VL-3B-Instruct      data/aqua_7
 bash scripts/run_whitebox_vision.sh OpenGVLab/InternVL3-8B-hf        data/vqfa_720_input.json            results/internvl_vqfa
 ```
 
-The vision inputs need the AQuA / VQ-FA images: `python data/build/build_aqua_input.py` downloads AQuA, and `VQFA_ROOT=... python data/build/build_vqfa_input.py` builds VQ-FA from its release. Settings, output files, the two EigV variants and memory notes are documented in [`whitebox/README.md`](whitebox/README.md).
+The vision inputs need the AQuA / VQ-FA images: `python data/build/build_aqua_input.py` downloads AQuA, and `VQFA_ROOT=... python data/build/build_vqfa_input.py` builds VQ-FA from its release. Settings, output files, the two EigV variants, and memory notes are documented in [`whitebox/README.md`](whitebox/README.md).
 
 **Black-box**: 11 rules → N samples per variant (vLLM) → NLI UQ per variant and pooled → AUROC per rule and pooled:
 
