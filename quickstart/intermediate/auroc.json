@@ -1,0 +1,36 @@
+{
+  "pipeline_b_logit_lens.json": {
+    "EigV_entail": {
+      "auroc": 0.7083487654320987,
+      "auroc_ties_6dp": 0.7148148148148147,
+      "n": 720
+    },
+    "EigV_disagree": {
+      "auroc": 0.6361059670781892,
+      "auroc_ties_6dp": 0.6419958847736625,
+      "n": 720
+    },
+    "DegMat_entail": {
+      "auroc": 0.8044444444444444,
+      "auroc_ties_6dp": 0.8044495884773663,
+      "n": 720
+    }
+  },
+  "pipeline_b_baseline_n10.json": {
+    "EigV_entail": {
+      "auroc": 0.6434619341563785,
+      "auroc_ties_6dp": 0.6520164609053498,
+      "n": 720
+    },
+    "EigV_disagree": {
+      "auroc": 0.6465380658436214,
+      "auroc_ties_6dp": 0.6104115226337448,
+      "n": 720
+    },
+    "DegMat_entail": {
+      "auroc": 0.7301440329218107,
+      "auroc_ties_6dp": 0.7301388888888889,
+      "n": 720
+    }
+  }
+}

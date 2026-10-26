@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e ".[dev]"
+          python -m spacy download en_core_web_sm
+          make nltk-data
+
+      - name: Run checks
+        run: make check
+
+      - name: Check CLI
+        run: input-ambiguity --help && input-ambiguity rules && input-ambiguity quickstart
+
+      - name: Build and check distribution
+        run: make dist-check

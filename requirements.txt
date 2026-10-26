@@ -1,0 +1,28 @@
+# Full environment for both detectors. The white-box versions are the ones used
+# for the release checks (Python 3.10); see whitebox/README.md for the note on
+# attribution scores and library versions.
+# Equivalent install from source: pip install -e ".[all]"
+torch==2.9.0
+transformers==5.6.2
+accelerate==1.12.0
+numpy==1.26.4
+scipy==1.13.1
+scikit-learn==1.6.1
+nltk==3.9.1
+pillow==11.3.0
+tqdm==4.67.1
+
+# Black-box detector (blackbox/): vLLM sampling, lm-polygraph UQ, spaCy POS tags.
+# After installing: python -m spacy download en_core_web_sm
+vllm
+lm-polygraph
+spacy
+lemminflect
+matplotlib
+
+# DiffMask on >20B text models (FORCE_INT8=1)
+bitsandbytes==0.48.2
+
+# data/build/* only
+datasets==3.5.0
+httpx==0.28.1

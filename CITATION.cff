@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+title: "Detect Before You Disambiguate: Perturbation-Based Input Ambiguity Detection in LLMs"
+message: "If you use this code in your research, please cite the AACL 2026 paper."
+type: software
+authors:
+  - family-names: Chen
+    given-names: Tiejin
+  - family-names: Liu
+    given-names: Xiaoou
+  - family-names: Clifford
+    given-names: Michael
+  - family-names: Moradipari
+    given-names: Ahmadreza
+  - family-names: Chen
+    given-names: Yitao
+  - family-names: Han
+    given-names: Kyungtae
+  - family-names: Ammar
+    given-names: Nejib
+  - family-names: Wei
+    given-names: Hua
+year: 2026
+repository-code: "https://github.com/Xiao0o0o/input-ambiguity-detection"
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "Detect Before You Disambiguate: Perturbation-Based Input Ambiguity Detection in LLMs"
+  authors:
+    - family-names: Chen
+      given-names: Tiejin
+    - family-names: Liu
+      given-names: Xiaoou
+    - family-names: Clifford
+      given-names: Michael
+    - family-names: Moradipari
+      given-names: Ahmadreza
+    - family-names: Chen
+      given-names: Yitao
+    - family-names: Han
+      given-names: Kyungtae
+    - family-names: Ammar
+      given-names: Nejib
+    - family-names: Wei
+      given-names: Hua
+  year: 2026
+  conference:
+    name: "The Asia-Pacific Chapter of the Association for Computational Linguistics (AACL 2026)"

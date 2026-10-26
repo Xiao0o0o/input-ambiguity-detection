@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "input-ambiguity-detection"
+version = "0.1.0"
+description = "Perturbation-based input ambiguity detection for LLMs (white-box and black-box detectors, AACL 2026)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Tiejin Chen" },
+    { name = "Xiaoou Liu" },
+    { name = "Michael Clifford" },
+    { name = "Ahmadreza Moradipari" },
+    { name = "Yitao Chen" },
+    { name = "Kyungtae Han" },
+    { name = "Nejib Ammar" },
+    { name = "Hua Wei" },
+]
+keywords = ["llm", "ambiguity", "uncertainty quantification", "perturbation", "question answering"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+# White-box detector, NLI scoring and AUROC. Exact versions used for the
+# release checks are pinned in requirements.txt.
+dependencies = [
+    "torch",
+    "transformers",
+    "accelerate",
+    "numpy",
+    "scipy",
+    "scikit-learn",
+    "nltk",
+    "pillow",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+# Black-box detector (vLLM sampling, lm-polygraph UQ, spaCy POS tags for the rules)
+blackbox = ["vllm", "lm-polygraph", "spacy", "lemminflect", "matplotlib"]
+# INT8 DiffMask for >20B text models
+int8 = ["bitsandbytes"]
+# data/build/* scripts
+data = ["datasets", "httpx"]
+all = ["input-ambiguity-detection[blackbox,int8,data]"]
+dev = ["pytest", "build", "twine", "spacy", "lemminflect"]
+
+[project.urls]
+Repository = "https://github.com/Xiao0o0o/input-ambiguity-detection"
+Issues = "https://github.com/Xiao0o0o/input-ambiguity-detection/issues"
+
+[project.scripts]
+input-ambiguity = "input_ambiguity.cli:main"
+
+# The repository keeps whitebox/ and blackbox/ at the top level; they are
+# installed as input_ambiguity.whitebox / input_ambiguity.blackbox.
+[tool.setuptools]
+packages = [
+    "input_ambiguity",
+    "input_ambiguity.blackbox",
+    "input_ambiguity.whitebox",
+    "input_ambiguity.whitebox.text",
+    "input_ambiguity.whitebox.vision",
+    "input_ambiguity.whitebox.pipeline",
+    "input_ambiguity.quickstart_data",
+]
+
+[tool.setuptools.package-dir]
+"input_ambiguity.blackbox" = "blackbox"
+"input_ambiguity.whitebox" = "whitebox"
+"input_ambiguity.quickstart_data" = "quickstart/intermediate"
+
+# Only the two per-question score files (1.3 MB) go into the wheel, for `input-ambiguity quickstart`.
+[tool.setuptools.package-data]
+"input_ambiguity.quickstart_data" = ["pipeline_b_logit_lens.json", "pipeline_b_baseline_n10.json"]
+
+[tool.setuptools.exclude-package-data]
+"input_ambiguity.quickstart_data" = ["*.gz", "_*.json", "auroc.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

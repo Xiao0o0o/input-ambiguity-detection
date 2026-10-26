@@ -1,0 +1,7 @@
+include LICENSE README.md CITATION.cff requirements.txt
+prune data
+prune quickstart
+include quickstart/intermediate/pipeline_b_logit_lens.json quickstart/intermediate/pipeline_b_baseline_n10.json
+prune tests
+prune scripts
+global-exclude __pycache__ *.py[cod]

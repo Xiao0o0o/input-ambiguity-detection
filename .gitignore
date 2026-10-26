@@ -1,0 +1,38 @@
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# Environments and secrets
+.env
+.env.*
+.venv/
+venv/
+
+# Run outputs (scripts write here by default)
+results/
+quickstart/outputs/
+*.npz
+run.log
+
+# Images created by data/build/* (the quick-start images are tracked)
+data/images/
+
+# Model / dataset caches
+hf_cache/
+.cache/
+wandb/
+
+# Local release material that is not part of the repository
+/*.zip
+/*.pdf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
